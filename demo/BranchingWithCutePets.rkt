@@ -33,5 +33,5 @@
 (define trade-for-cute
   (lambda (p)
     (cond
-      ((or (string=? p "cat") (string=? p "dog")) p)
-      ((string=? p "snake") "cat"))))
+      ((cute? p) p)
+      ((not (cute? p)) "cat"))))
