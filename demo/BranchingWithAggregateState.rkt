@@ -1,6 +1,6 @@
 ;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
-#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname RamificationsWithAggregateState) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
+#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname BranchingWithAggregateState) (read-case-sensitive #f) (teachpacks ((lib "image.rkt" "teachpack" "deinprogramm" "sdp"))) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ((lib "image.rkt" "teachpack" "deinprogramm" "sdp")))))
 ; Datendefinition
 ; Ein Aggregatzustand ist eins der folgenden:
 ; - fest
@@ -26,6 +26,6 @@
   (lambda (temp)
     (cond
       ((<= temp 0) "solid")
-      ((and (> temp 0) (< temp 100)) "liquid")
-      ((>= temp 100) "gas"))))
+      ((< temp 100) "liquid")
+      (else "gas"))))
   
