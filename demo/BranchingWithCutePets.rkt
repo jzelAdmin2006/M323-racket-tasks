@@ -30,8 +30,12 @@
 (check-expect (trade-for-cute "cat") "cat")
 (check-expect (trade-for-cute "snake") "cat")
 
+;(define trade-for-cute
+;  (lambda (p)
+;    (cond ; binäre Verzweigung
+;      ((cute? p) p)
+;      (else "cat"))))
+
 (define trade-for-cute
   (lambda (p)
-    (cond ; binäre Verzweigung
-      ((cute? p) p)
-      (else "cat"))))
+    (if (cute? p) p "cat")))
