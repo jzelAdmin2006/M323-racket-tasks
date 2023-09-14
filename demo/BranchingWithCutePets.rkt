@@ -32,6 +32,6 @@
 
 (define trade-for-cute
   (lambda (p)
-    (cond
+    (cond ; binäre Verzweigung
       ((cute? p) p)
       (else "cat"))))
