@@ -34,4 +34,4 @@
   (lambda (p)
     (cond
       ((cute? p) p)
-      ((not (cute? p)) "cat"))))
+      (else "cat"))))
