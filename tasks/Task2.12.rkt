@@ -26,4 +26,4 @@
       ((< revenue 15000) "white")
       ((and (>= revenue 15000) (< revenue 50000)) "gold")
       ((and (>= revenue 50000) (<= revenue 150000)) "platinum")
-      ((> revenue 150000) "black"))))
+      (else "black"))))
