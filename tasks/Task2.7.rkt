@@ -17,7 +17,4 @@
 
 (define cute?
   (lambda (p)
-    (if
-      (or (string=? p "cat") (string=? p "dog"))
-      #t
-      #f)))
+      (or (string=? p "cat") (string=? p "dog"))))

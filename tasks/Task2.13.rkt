@@ -62,11 +62,7 @@
 
 (define min-3?
   (lambda (a b c)
-    (if
-     (= a (min-3 a b c))
-     #t
-     #f
-     )))
+     (= a (min-3 a b c))))
 
 ; Ist die erste von drei gegebenen Zahlen zwischen den beiden anderen liegt (oder gleich eine der anderen beiden ist)?
 (: valid-value? (number number number -> boolean))
@@ -79,11 +75,7 @@
 
 (define valid-value?
   (lambda (a b c)
-    (if
-     (and (>= a (min-2 b c)) (<= a (max-2 b c)))
-     #t
-     #f
-     )))
+     (and (>= a (min-2 b c)) (<= a (max-2 b c)))))
 
 ; Die clamp Funktion begrenzt x auf den Bereich [min, max], indem sie entweder x, min oder max zurückgibt, je nachdem wo x liegt.
 (: clamp (number number number -> number))
