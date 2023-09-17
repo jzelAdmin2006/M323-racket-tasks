@@ -64,7 +64,7 @@
   (lambda (a b c)
      (= a (min-3 a b c))))
 
-; Ist die erste von drei gegebenen Zahlen zwischen den beiden anderen liegt (oder gleich eine der anderen beiden)?
+; Ist die erste von drei gegebenen Zahlen zwischen den beiden anderen (oder gleich eine der anderen beiden)?
 (: valid-value? (number number number -> boolean))
 
 (check-expect (valid-value? 234 6247 16) #t)
