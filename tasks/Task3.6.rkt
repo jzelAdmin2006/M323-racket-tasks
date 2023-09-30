@@ -15,6 +15,7 @@
 (define t1 (make-time 23 59))
 (define t2 (make-time 0 0))
 (define t3 (make-time 23 55))
+(define t4 (make-time 22 55))
 
 (time-hour t1)
 (time-minute t3)
@@ -57,8 +58,8 @@
 
 (check-expect (time-add-minutes t3 3) (make-time 23 58))
 (check-expect (time-add-minutes t2 1237) (make-time 20 37))
+(check-expect (time-add-minutes t4 10) (make-time 23 05))
 
 (define time-add-minutes
   (lambda (t m)
-    (make-time (+ (time-hour t) (quotient m 60))
-               (+ (time-minute t) (remainder m 60)))))
+    (msm->time (+ (minutes-since-midnight t) m))))
