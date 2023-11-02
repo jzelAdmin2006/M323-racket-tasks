@@ -1,6 +1,6 @@
 ;; Die ersten drei Zeilen dieser Datei wurden von DrRacket eingefügt. Sie enthalten Metadaten
 ;; über die Sprachebene dieser Datei in einer Form, die DrRacket verarbeiten kann.
-#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname Task4.10) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
+#reader(lib "beginner-reader.rkt" "deinprogramm" "sdp")((modname Task4.10_record) (read-case-sensitive #f) (teachpacks ()) (deinprogramm-settings #(#f write repeating-decimal #f #t none explicit #f ())))
 ; Es gibt keine Steigung
 (define-record no-slope
   make-no-slope
@@ -21,7 +21,7 @@
 
 (define slope
   (lambda (x1 y1 x2 y2)
-    (if (= (- x2 x1) 0)
+    (if (= x1 x2)
         (make-no-slope)
         (/ (- y2 y1)
            (- x2 x1))))) 
