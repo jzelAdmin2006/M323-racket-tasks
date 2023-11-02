@@ -4,10 +4,14 @@
 ; Steigung einer Gerade berechnen
 (: slope (real real real real -> (mixed real string)))
 
+; Hat eine Gerade keine Steigung?
+(: no-slope? ((mixed real string) -> boolean))
+
 (check-expect (slope 0 0 1 1) 1)
 (check-expect (slope 0 0 2 1) 1/2)
 (check-expect (slope 1 2 3 5) 3/2)
-(check-expect (string? (slope 0 0 0 1)) #t)
+(check-expect (no-slope? (slope 1 2 3 5)) #f)
+(check-expect (no-slope? (slope 0 0 0 1)) #t)
 
 #;(define slope
   (lambda (x1 y1 x2 y2)
@@ -20,3 +24,5 @@
         "no slope"
         (/ (- y2 y1)
            (- x2 x1))))) 
+
+(define no-slope? string?)
