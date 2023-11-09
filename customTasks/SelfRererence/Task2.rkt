@@ -5,7 +5,7 @@
 (: gaussian-sum (natural -> natural))
 
 ; Testfälle für Fakultät
-(check-expect (gaussian-sum 0) 1)
+(check-expect (gaussian-sum 0) 0)
 (check-expect (gaussian-sum 1) 1)
 (check-expect (gaussian-sum 2) 3)
 (check-expect (gaussian-sum 3) 6)
@@ -14,7 +14,7 @@
 
 (define gaussian-sum
   (lambda (n)
-    (if (<= n 1)
-     1
+    (if (= n 0)
+     0
      (+ n (gaussian-sum (- n 1)))
      )))
