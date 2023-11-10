@@ -32,3 +32,19 @@
 (define combination
   (lambda (n k)
     (/ (factorial n) (* (factorial (- n k)) (factorial k)))))
+
+; Rekursive Implementierung der Kombination (sehr ineffizient, ist aber eine gute Übung)
+(: combination-recursive (natural natural -> natural))
+
+; Testfälle für Kombination
+(check-expect (combination-recursive 42 6) 5245786)
+(check-expect (combination-recursive 10 3) 120)
+(check-expect (combination-recursive 2 0) 1)
+(check-expect (combination-recursive 2 2) 1)
+(check-expect (combination-recursive 5 3) 10)
+
+(define combination-recursive
+  (lambda (n k)
+    (if (or (= k 0) (= n k))
+        1
+        (+ (combination-recursive (- n 1) (- k 1)) (combination-recursive (- n 1) k )))))
