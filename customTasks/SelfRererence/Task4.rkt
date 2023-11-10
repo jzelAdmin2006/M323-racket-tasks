@@ -22,7 +22,7 @@
 ; Kombination (z.B. beim Lotto die k richtigen Zahlen von gesamthaften n)
 (: combination (natural natural -> natural))
 
-; Testfälle für Variation
+; Testfälle für Kombination
 (check-expect (combination 42 6) 5245786)
 (check-expect (combination 10 3) 120)
 (check-expect (combination 2 0) 1)
