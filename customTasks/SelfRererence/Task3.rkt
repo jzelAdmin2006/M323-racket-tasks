@@ -19,7 +19,7 @@
      (* n (factorial (- n 1)))
      )))
 
-; Variation (z.B. bei Pferderennen die n schnellsten Pferde)
+; Variation (z.B. beim Pferderennen die k schnellsten Pferde von gesamthaften n)
 (: variation (natural natural -> natural))
 
 ; Testfälle für Variation
