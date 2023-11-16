@@ -172,3 +172,20 @@
           (cons f r)
           r)))))
 
+
+; Ungerade Elemente einer Liste herausfiltern
+(: odds (list-of-number -> list-of-number))
+
+; Testfall
+(check-expect (odds list4) (cons 3 (cons 5 empty)))
+
+(define odds
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (odds (rest list)))
+       (if (odd? f)
+           (cons f r)
+           r)))))
