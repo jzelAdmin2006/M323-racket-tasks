@@ -209,3 +209,23 @@
        (+ 1
           (list-length (rest list)))
        ))))
+
+
+; Alle Zahlen der Liste mit 2 multiplizieren
+(: multiply-by-2 (list-of-number -> list-of-number))
+
+; Testfall
+(check-expect (multiply-by-2 list0) empty)
+(check-expect (multiply-by-2 list1) (cons 34 empty))
+(check-expect (multiply-by-2 list2) (cons 10 (cons 34 empty)))
+(check-expect (multiply-by-2 list3) (cons 6 (cons 10 (cons 34 empty))))
+(check-expect (multiply-by-2 list4) (cons 4 (cons 6 (cons 10 (cons 20 empty)))))
+
+(define multiply-by-2
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (multiply-by-2 (rest list)))
+       (cons (* f 2) r)))))
