@@ -229,3 +229,23 @@
        (define f (first list))
        (define r (multiply-by-2 (rest list)))
        (cons (* f 2) r)))))
+
+
+; Alle Zahlen der Liste mit 2 potenzieren
+(: squaring-list (list-of-number -> list-of-number))
+
+; Testfall
+(check-expect (squaring-list list0) empty)
+(check-expect (squaring-list list1) (cons 289 empty))
+(check-expect (squaring-list list2) (cons 25 (cons 289 empty)))
+(check-expect (squaring-list list3) (cons 9 (cons 25 (cons 289 empty))))
+(check-expect (squaring-list list4) (cons 4 (cons 9 (cons 25 (cons 100 empty)))))
+
+(define squaring-list
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      ((cons? list)
+       (define f (first list))
+       (define r (squaring-list (rest list)))
+       (cons (* f f) r)))))
