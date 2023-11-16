@@ -189,3 +189,23 @@
        (if (odd? f)
            (cons f r)
            r)))))
+
+
+; Anzahl der Elemente einer Liste
+(: list-length (list-of-number -> number))
+
+; Testfälle
+(check-expect (list-length list0) 0)
+(check-expect (list-length list1) 1)
+(check-expect (list-length list2) 2)
+(check-expect (list-length list3) 3)
+(check-expect (list-length list4) 4)
+
+(define list-length
+  (lambda (list)
+    (cond
+      ((empty? list) 0)
+      ((cons? list)
+       (+ 1
+          (list-length (rest list)))
+       ))))
