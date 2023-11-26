@@ -345,6 +345,67 @@
     (cond
       ((empty? a) b)
       (else
-       (define f (first a))
        (define r (rest a))
-       (cons f (concatenate r b))))))
+       (cons (first a) (concatenate r b))))))
+
+; Kein Resultat
+(define-record no-result
+  make-no-result
+  no-result?)
+
+; Die kleinste Zahl aus einer Liste von Zahlen bekommen
+(: list-min (list-of-number -> (mixed number no-result)))
+
+; Testfälle
+(check-expect (list-min list0) (make-no-result))
+(check-expect (list-min list2) 5)
+(check-expect (list-min list3) 3)
+
+(define list-min
+  (lambda (list)
+    (cond
+      ((empty? list) (make-no-result))
+      (else ; (cons? list)
+       (define rest-min (list-min (rest list)))
+       (if (no-result? rest-min)
+           (first list)
+           (min (first list) rest-min))))))
+
+; Das erste Vorkommen einer gegebenen Zahl aus einer Liste entfernen
+(: delete-once (number list-of-number -> list-of-number))
+
+; Testfälle
+(check-expect (delete-once 0 list0) list0)
+(check-expect (delete-once 17 list1) empty)
+(check-expect (delete-once 5 list2) (cons 17 empty))
+(check-expect (delete-once 5 list3) (cons 3 (cons 17 empty)))
+(check-expect (delete-once 10 list4) (cons 2 (cons 3 (cons 5 empty))))
+(check-expect (delete-once 5 (concatenate list3 list3)) (cons 3 (cons 17 (cons 3 (cons 5 (cons 17 empty))))))
+
+(define delete-once
+  (lambda (n list)
+    (cond
+      ((empty? list) empty)
+      (else
+       (define f (first list))
+       (define r (rest list))
+       (if (= f n) r (cons f (delete-once n r)))))))
+
+; Liste von Zahlen in aufsteigender Reihenfolge sortieren
+(: sort (list-of-number -> list-of-number))
+
+; Testfälle
+(check-expect (sort list0) list0)
+(check-expect (sort list1) list1)
+(check-expect (sort list2) list2)
+(check-expect (sort (cons 4 (cons 3 (cons 6 (cons 1 empty))))) (cons 1 (cons 3 (cons 4 (cons 6 empty)))))
+(check-expect (sort (cons 9 (cons -4 (cons 0 empty)))) (cons -4 (cons 0 (cons 9 empty))))
+(check-expect (sort (cons 2 (cons 3 (cons 2 (cons 7 empty))))) (cons 2 (cons 2 (cons 3 (cons 7 empty)))))
+
+(define sort
+  (lambda (list)
+    (cond
+      ((empty? list) empty)
+      (else
+       (define min (list-min list))
+       (cons min (sort (delete-once min list)))))))
