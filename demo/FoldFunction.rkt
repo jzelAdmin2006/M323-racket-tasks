@@ -136,3 +136,53 @@
                (lambda (first rest)
                  (+ 1 rest))
                list)))
+
+(: list-or ((%a -> boolean) (list-of %a) -> boolean))
+
+(check-expect (list-or even? (list 2 3 1)) #t)
+(check-expect (list-or even? (list 1 3)) #f)
+
+(define list-or
+  (lambda (f list)
+    (list-fold #f
+               (lambda (first rest)
+                 (or (f first) rest))
+               list)))
+
+(: count-trues ((%a -> boolean) (list-of %a) -> natural))
+
+(check-expect (count-trues even? (list 1 2 3 4)) 2)
+
+(define count-trues
+  (lambda (f list)
+    (list-fold 0
+               (lambda (first rest)
+                 (if (f first)
+                     (+ 1 rest)
+                     rest))
+               list)))
+
+(: contains? (%a (list-of %a) -> boolean))
+
+(check-expect (contains? 3 (list 1 2 3 4)) #t)
+(check-expect (contains? 5 (list 1 2 3 4)) #f)
+
+(define contains?
+  (lambda (a list)
+    (list-fold #f
+               (lambda (first rest)
+                 (or (= a first) rest))
+               list)))
+
+(: remove-duplicates ((list-of %a) -> (list-of %a)))
+
+(check-expect (remove-duplicates (list 1 2 3 2 4 5 2 5)) (list 1 3 4 2 5))
+
+(define remove-duplicates
+  (lambda (list)
+    (list-fold empty
+               (lambda (first rest)
+                 (if (contains? first rest)
+                     rest
+                     (cons first rest)))
+               list)))
