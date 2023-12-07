@@ -125,3 +125,14 @@
                      (cons first rest)
                      rest))
                list)))
+
+(: list-length2 ((list-of any) -> natural))
+
+(check-expect (list-length2 (list 1 2 3 4)) 4)
+
+(define list-length2
+  (lambda (list)
+    (list-fold 0
+               (lambda (first rest)
+                 (+ 1 rest))
+               list)))
