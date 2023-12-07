@@ -112,3 +112,16 @@
                   (f first)
                   rest))
                list)))
+
+(: list-filter2 ((%a -> boolean) (list-of %a) -> (list-of %a)))
+
+(check-expect (list-filter2 even? (list 1 2 3 4)) (list 2 4))
+
+(define list-filter2
+  (lambda (f list)
+    (list-fold empty
+               (lambda (first rest)
+                 (if (f first)
+                     (cons first rest)
+                     rest))
+               list)))
