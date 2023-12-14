@@ -166,12 +166,14 @@
 
 (check-expect (contains? 3 (list 1 2 3 4)) #t)
 (check-expect (contains? 5 (list 1 2 3 4)) #f)
+(check-expect (contains? "a" (list "b" "a")) #t)
+(check-expect (contains? "a" (list "b" "c")) #f)
 
 (define contains?
   (lambda (a list)
     (list-fold #f
                (lambda (first rest)
-                 (or (= a first) rest))
+                 (or (equal? a first) rest))
                list)))
 
 (: remove-duplicates ((list-of %a) -> (list-of %a)))
