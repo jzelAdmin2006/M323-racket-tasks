@@ -201,3 +201,16 @@
                (lambda (first rest)
                  (or (f first) rest))
                list)))
+
+(: every? ((%a -> boolean) (list-of %a) -> boolean))
+
+(check-expect (every? even? (list 1 2 3)) #f)
+(check-expect (every? even? (list 1 5 3)) #f)
+(check-expect (every? even? (list 2 8 28)) #t)
+
+(define every?
+  (lambda (f list)
+    (list-fold #t
+               (lambda (first rest)
+                 (and (f first) rest))
+               list)))
